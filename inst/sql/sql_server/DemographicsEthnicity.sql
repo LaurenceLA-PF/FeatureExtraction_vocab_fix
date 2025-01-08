@@ -1,4 +1,5 @@
 -- Feature construction
+
 SELECT 
 	CAST(ethnicity_concept_id  AS BIGINT) * 1000 + @analysis_id AS covariate_id,
 {@temporal | @temporal_sequence} ? {
@@ -17,7 +18,7 @@ INNER JOIN @cdm_database_schema.person
 	ON cohort.subject_id = person.person_id
 WHERE ethnicity_concept_id  IN (
 		SELECT concept_id
-		FROM lawrel16_pharmetrics_202412.concept
+		FROM team_omop.lawrel16_pharmetrics_202412.concept
 		WHERE LOWER(concept_class_id) = 'ethnicity'
 		)
 {@excluded_concept_table != ''} ? {	AND ethnicity_concept_id  NOT IN (SELECT id FROM @excluded_concept_table)}
@@ -45,7 +46,7 @@ FROM (
 	SELECT DISTINCT covariate_id
 	FROM @covariate_table
 	) t1
-LEFT JOIN lawrel16_pharmetrics_202412.concept
+LEFT JOIN team_omop.lawrel16_pharmetrics_202412.concept
 	ON concept_id = CAST((covariate_id - @analysis_id) / 1000 AS INT);
 	
 INSERT INTO #analysis_ref (
