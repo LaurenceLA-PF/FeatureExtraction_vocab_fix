@@ -140,6 +140,7 @@ getDbCovariateData <- function(connectionDetails = NULL,
   checkmate::reportAssertions(collection = errorMessages)
   if (!is.null(connectionDetails)) {
     connection <- DatabaseConnector::connect(connectionDetails)
+    dbGetQuery(connection, "ALTER SESSION SET JDBC_QUERY_RESULT_FORMAT='JSON'")
     on.exit(DatabaseConnector::disconnect(connection))
   }
   if (cohortTableIsTemp) {
