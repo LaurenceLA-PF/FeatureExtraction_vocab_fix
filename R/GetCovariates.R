@@ -99,7 +99,7 @@
 #' }
 #'
 #' @export
-getDbCovariateData <- function(connectionDetails = NULL,
+getDbCovariateData1 <- function(connectionDetails = NULL,
                                connection = NULL,
                                oracleTempSchema = NULL,
                                cdmDatabaseSchema,
@@ -114,6 +114,9 @@ getDbCovariateData <- function(connectionDetails = NULL,
                                aggregated = FALSE,
                                minCharacterizationMean = 0,
                                tempEmulationSchema = NULL) {
+  
+  message("Running FE for Panther")
+  
   if (is.null(connectionDetails) && is.null(connection)) {
     stop("Need to provide either connectionDetails or connection")
   }
