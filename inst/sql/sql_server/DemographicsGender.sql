@@ -44,7 +44,7 @@ FROM (
 	SELECT DISTINCT covariate_id
 	FROM @covariate_table
 	) t1
-LEFT JOIN @cdm_database_schema.concept
+LEFT JOIN team_omop.lawrel16_pharmetrics_202412.concept
 	ON concept_id = CAST((covariate_id - @analysis_id) / 1000 AS INT);
 	
 INSERT INTO #analysis_ref (
