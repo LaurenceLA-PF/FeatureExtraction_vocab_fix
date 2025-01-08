@@ -99,7 +99,7 @@
 #' }
 #'
 #' @export
-getDbCovariateData1 <- function(connectionDetails = NULL,
+getDbCovariateData <- function(connectionDetails = NULL,
                                connection = NULL,
                                oracleTempSchema = NULL,
                                cdmDatabaseSchema,
